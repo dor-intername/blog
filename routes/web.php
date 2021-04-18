@@ -18,5 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('/dor',function(){
+    return \App\Models\Post::find(1);
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
