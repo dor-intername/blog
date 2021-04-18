@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->integer('views');
+            $table->integer('views')->nullable();
             $table->string('slug')->nullable();
             $table->string('content');
             $table->integer('favorite_comment')->nullable();
