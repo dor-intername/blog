@@ -22,6 +22,26 @@
     </section>
 
 
-    <section class="latest-posts row border"></section>
+    <section class="posts row">
+        <div class="col-8">
+            <div class="post-wrapper border"></div>
+            <div class="post-wrapper border"></div>
+            <div class="post-wrapper border"></div>
+            <div class="post-wrapper border"></div>
+            <div class="post-wrapper border"></div>
+            <div class="post-wrapper border"></div>
+            <div class="post-wrapper border"></div>
+            <div class="post-wrapper border"></div>
+        </div>
+
+        <div class="col-4">
+            <div class="likable-post-wrapper border"></div>
+            <div class="likable-post-wrapper border"></div>
+            <div class="likable-post-wrapper border"></div>
+            <div class="likable-post-wrapper border"></div>
+            <div class="likable-post-wrapper border"></div>
+            <div class="likable-post-wrapper border"></div>
+        </div>
+    </section>
 </div>
 </x-master>
