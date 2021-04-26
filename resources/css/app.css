@@ -1,0 +1,28 @@
+.top-posts {
+    min-height: 650px;
+    max-height: 650px;
+    /*border-radius: 10px;*/
+}
+
+.main-top-post {
+    height: 650px;
+}
+
+.untop-post {
+    height: 650px
+}
+.first-untop-post{
+    height: 55%;
+}
+.second-untop-post{
+    height: 45%;
+}
+.categories{
+    margin-top: 50px;
+    height: 270px;
+}
+
+.latest-posts{
+    margin-top: 50px;
+
+}
