@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePrivilegeUserTable extends Migration
+class CreateCategoryPostTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,20 @@ class CreatePrivilegeUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('privilege_user', function (Blueprint $table) {
-            $table->primary(['privilege_id','user_id']);
-            $table->foreignId('privilege_id');
-            $table->foreignId('user_id');
+        Schema::create('category_post', function (Blueprint $table) {
+            $table->primary(['category_id','post_id']);
+            $table->foreignId('category_id');
+            $table->foreignId('post_id');
             $table->timestamps();
 
-            $table->foreign('privilege_id')
+            $table->foreign('category_id')
                 ->references('id')
-                ->on('privileges')
+                ->on('categories')
                 ->onDelete('cascade');
 
-            $table->foreign('user_id')
+            $table->foreign('post_id')
                 ->references('id')
-                ->on('users')
+                ->on('posts')
                 ->onDelete('cascade');
         });
     }
@@ -38,6 +38,6 @@ class CreatePrivilegeUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('privilege_user');
+        Schema::dropIfExists('category_post');
     }
 }
