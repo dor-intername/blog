@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $data =[
+            'topPosts' => Post::order('views','DESC')->limit(3)->get(),
+            'categories' => Category::limit(6)->get(),
+            'latestPosts' => Post::latest()->limit(8)->get(),
+            'likablePosts' => Post::order('likes','DESC')->limit(6)->get(),
+        ];
+
+        return view('welcome',$data);
     }
 }

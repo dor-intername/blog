@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Eloquent;
+/**
+ * @mixin Builder
+ */
 class PostController extends Controller
 {
-
 
     public function index()
     {
@@ -17,9 +20,15 @@ class PostController extends Controller
     {
     }
 
-    public function store()
+    public function store(Request $request,User $user)
     {
-    }
+     $post = $request->validate([
+            'user_id' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+        $user->posts($post);
+        }
 
     public function edit()
     {
