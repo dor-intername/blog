@@ -24,8 +24,14 @@ class Post extends Model
         return $this->belongsToMany(Comment::class, "comment_post");
     }
 
-    static function order($value,$direction = 'DESC'){
-        return self::orderBy($value,$direction);
+    public function orderLimit($value,$direction = 'DESC',$limit=''){
+        return self::orderBy($value,$direction)->limit($limit);
+    }
+
+
+    public function path($path=''){
+
+        return redirect('/post/'.$path);
     }
 
 }

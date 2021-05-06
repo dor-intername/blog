@@ -12,34 +12,56 @@ use Eloquent;
 class PostController extends Controller
 {
 
-    public function index()
+    public function index(Post $post)
     {
+        return view('post.index',compact('post'));
     }
 
     public function create()
     {
+        return view('post.create');
     }
 
-    public function store(Request $request,User $user)
+    public function store(Request $request,Post $post)
     {
-     $post = $request->validate([
-            'user_id' => 'required',
+         $request->validate([
             'title' => 'required',
             'content' => 'required',
         ]);
-        $user->posts($post);
-        }
 
-    public function edit()
+         $request->request->add(['user_id'=> auth()->id()]);
+//
+        Post::create($request->all());
+
+
+        return redirect(route('home'));
+    }
+
+
+    public function edit(Post $id)
     {
+        $post = $id;
+
+        return view('post.update',compact('post'));
 
     }
 
-    public function update()
+    public function update(Request $request,Post $post)
     {
+       $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        $post->update($request->all());
+
+        return redirect('/post/'.$post->id);
     }
 
-    public function delete()
+    public function destroy(Post $post)
     {
+        $post->delete();
+
+        return redirect('/');
     }
 }

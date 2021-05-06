@@ -23,14 +23,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Post $post)
     {
 
         $data =[
-            'topPosts' => Post::order('views','DESC')->limit(3)->get(),
+
+            'topPosts' => $post->orderLimit('views','DESC',3)->get(),
             'categories' => Category::limit(6)->get(),
-            'latestPosts' => Post::latest()->limit(8)->get(),
-            'likablePosts' => Post::order('likes','DESC')->limit(6)->get(),
+            'latestPosts' => $post->latest()->limit(8)->get(),
+            'likablePosts' => $post->orderLimit('likes','DESC',6)->get(),
         ];
 
         return view('welcome',$data);

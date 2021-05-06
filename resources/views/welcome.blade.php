@@ -1,33 +1,33 @@
 <x-master>
-<div class="container">
-    <section class="row top-posts border ">
+    <div class="container">
+        <section class="row top-posts border ">
 
-           @include('top-posts._main-top-post')
+            @include('top-posts._main-top-post')
 
             @include('top-posts._untop-top-posts')
-    </section>
+        </section>
 
 
-    <section class="row categories border">
-        @foreach($categories as $category)
+        <section class="row categories border">
+            @foreach($categories as $category)
 
-        @include('_category')
-        @endforeach
-    </section>
-
-
-    <section class="posts row">
-        <div class="col-8">
-            @foreach($latestPosts as $post)
-                @include('_latest_posts')
+                @include('_category')
             @endforeach
-        </div>
+        </section>
 
-        <div class="col-4">
-            @foreach($likablePosts as $post)
-            @include('_likable_post')
-            @endforeach
-        </div>
-    </section>
-</div>
+
+        <section class="posts row">
+            <div class="col-8">
+                @foreach($latestPosts as $post)
+                    @include('_latest_posts')
+                @endforeach
+            </div>
+
+            <div class="col-4">
+                @foreach($likablePosts as $post)
+                    @include('_likable_post')
+                @endforeach
+            </div>
+        </section>
+    </div>
 </x-master>
