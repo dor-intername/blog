@@ -27,11 +27,8 @@ class HomeController extends Controller
     {
 
         $data =[
-
-            'topPosts' => $post->orderLimit('views','DESC',3)->get(),
+            'post' => $post,
             'categories' => Category::limit(6)->get(),
-            'latestPosts' => $post->latest()->limit(8)->get(),
-            'likablePosts' => $post->orderLimit('likes','DESC',6)->get(),
         ];
 
         return view('welcome',$data);

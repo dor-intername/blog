@@ -18,13 +18,13 @@
 
         <section class="posts row">
             <div class="col-8">
-                @foreach($latestPosts as $post)
+                @foreach($post->latestPosts() as $post)
                     @include('_latest_posts')
                 @endforeach
             </div>
 
             <div class="col-4">
-                @foreach($likablePosts as $post)
+                @foreach($post->likablePosts() as $post)
                     @include('_likable_post')
                 @endforeach
             </div>

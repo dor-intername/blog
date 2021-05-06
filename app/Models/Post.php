@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\TraitsPost;
 /**
  *
  * @mixin \Eloquent
@@ -12,7 +13,7 @@ class Post extends Model
 {
     protected $guarded= [];
 
-    use HasFactory;
+    use HasFactory,TraitsPost;
 
 
 
@@ -20,13 +21,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments() {
-        return $this->belongsToMany(Comment::class, "comment_post");
-    }
 
-    public function orderLimit($value,$direction = 'DESC',$limit=''){
-        return self::orderBy($value,$direction)->limit($limit);
-    }
 
 
     public function path($path=''){
