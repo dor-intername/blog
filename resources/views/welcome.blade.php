@@ -2,9 +2,9 @@
     <div class="container">
         <section class="row top-posts border ">
 
-            @include('top-posts._main-top-post')
+            @include('posts.top-posts._main-top-post')
 
-            @include('top-posts._untop-top-posts')
+            @include('posts.top-posts._untop-top-posts')
         </section>
 
 
@@ -19,13 +19,13 @@
         <section class="posts row">
             <div class="col-8">
                 @foreach($post->latestPosts() as $post)
-                    @include('_latest_posts')
+                    @include('posts._latest_posts')
                 @endforeach
             </div>
 
             <div class="col-4">
                 @foreach($post->likablePosts() as $post)
-                    @include('_likable_post')
+                    @include('posts._likable_post')
                 @endforeach
             </div>
         </section>

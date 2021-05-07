@@ -21,7 +21,9 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-
+    public function comments() {
+        return $this->belongsToMany(Comment::class, "comment_post");
+    }
 
 
     public function path($path=''){
@@ -29,4 +31,9 @@ class Post extends Model
         return redirect('/post/'.$path);
     }
 
+
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
 }

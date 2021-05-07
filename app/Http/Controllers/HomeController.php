@@ -23,14 +23,4 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Post $post)
-    {
-
-        $data =[
-            'post' => $post,
-            'categories' => Category::limit(6)->get(),
-        ];
-
-        return view('welcome',$data);
-    }
 }

@@ -17,11 +17,17 @@ Auth::routes();
 Route::get('/dor/{id}',function($stam){
     return \App\Models\User::find($stam)->posts;
 });
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\PostController::class, 'show'])->name('home');
 Route::post('/posts/',[\App\Http\Controllers\PostController::class,'store']);
 Route::get('/post/create',[\App\Http\Controllers\PostController::class,'create']);
 Route::get('/post/{post}',[\App\Http\Controllers\PostController::class,'index'])->name('post');
-Route::get('/post/{id}/update',[\App\Http\Controllers\PostController::class,'edit']);
+Route::get('/post/{id}/edit',[\App\Http\Controllers\PostController::class,'edit']);
+////Route::get('/post/{post:slug}',[\App\Http\Controllers\PostController::class,'index'])->name('post');
 Route::put('/post/{post}/update',[\App\Http\Controllers\PostController::class,'update']);
-Route::patch('/post/{post}/update',[\App\Http\Controllers\PostController::class,'update']);
 Route::delete('/post/{post}/delete',[\App\Http\Controllers\PostController::class,'destroy']);
+
+Route::get('/category/{category}', [App\Http\Controllers\CategoryController::class, 'show'])->name('category');
+Route::get('/category/{category}/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name('category.edit');
+Route::put('/category/{category}/update', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
+Route::delete('/category/{category}/delete',[\App\Http\Controllers\CategoryController::class,'destroy']);
+

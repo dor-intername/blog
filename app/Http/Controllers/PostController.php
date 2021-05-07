@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,17 +13,32 @@ use Eloquent;
 class PostController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Post $post)
     {
-        return view('post.index',compact('post'));
+        return view('posts.post.index',compact('post'));
+    }
+
+    public function show(Post $post,Category $category){
+
+        $data =[
+            'post' => $post,
+            'categories' => $category->limit(6)->get(),
+        ];
+
+        return view('welcome',$data);
     }
 
     public function create()
     {
-        return view('post.create');
+        return view('posts.post.create');
     }
 
-    public function store(Request $request,Post $post)
+    public function store(Request $request)
     {
          $request->validate([
             'title' => 'required',
@@ -42,7 +58,7 @@ class PostController extends Controller
     {
         $post = $id;
 
-        return view('post.update',compact('post'));
+        return view('posts.post.edit',compact('post'));
 
     }
 
@@ -62,6 +78,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect('/');
+        return redirect('/')->with('success','Post is Deleted');
     }
 }

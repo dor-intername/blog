@@ -24,11 +24,6 @@ trait TraitsPost{
     }
 
 
-    public function comments() {
-        return $this->belongsToMany(Comment::class, "comment_post");
-    }
-
-
 }
 
 
