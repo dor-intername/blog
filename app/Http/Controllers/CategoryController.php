@@ -21,6 +21,22 @@ class CategoryController extends Controller
     }
 
 
+    public function create(){
+
+        return view('categories.create');
+    }
+    public function store(Request $request){
+
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+       $category =  Category::create($request->all());
+
+        return redirect(route('category',[$category->id]));
+    }
+
+
     public function edit(Category $category)
     {
 

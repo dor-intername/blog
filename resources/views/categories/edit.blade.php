@@ -1,6 +1,6 @@
 <x-master>
 
-    <form action="/category/{{$category->id}}/update" method="POST">
+    <form action="{{route('category.store')}}" method="POST">
         @csrf
         @method('PUT')
         <input type="text" name="name" value="{{$category->name}}">
