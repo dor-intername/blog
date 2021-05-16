@@ -16,11 +16,11 @@ class User
      */
     public function handle(Request $request, Closure $next)
     {
-        $role = '';
-        foreach($request->user()->privileges as $role){
-            $role = $role->name;
-        };
-        if($role == 'Administrator'){
+//        $role = '';
+//        foreach($request->user()->privileges as $role){
+//            $role = $role->name;
+//        };
+        if($request->user()->hasRole('Administrator')){
         dd('greatfor u');
             return $next($request);
 
