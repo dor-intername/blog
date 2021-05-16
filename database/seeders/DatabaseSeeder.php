@@ -17,7 +17,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 2 ; $i++) {
+        $roles = ['Administrator', 'Editor', 'Member'];
+
+        for ($i = 0; $i < count($roles); $i++) {
+
+            DB::table('privileges')->insert(['name' => $roles[$i]]);
+        }
+
+        for($i = 0; $i < 15 ; $i++) {
           $category = Category::factory()->create();
            $post = Post::factory()->create();
 

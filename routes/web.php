@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfilesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,11 +37,14 @@ Route::middleware(['can:userCreator,post'])->group(function () {
 
 
 Route::post('/category', [CategoryController::class, 'store'])->name('category.create');
-Route::get('/category/create', [CategoryController::class, 'create'])->name('category.store');
+Route::middleware('user.administrator')->group(function () {
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.store');
+    Route::get('/category/{category:id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/category/{category:id}/update', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/category/{category}/delete', [CategoryController::class, 'destroy'])->name('category.destory');
+});
 Route::get('/category/{category:id}', [CategoryController::class, 'show'])->name('category');
-Route::get('/category/{category:id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
-Route::put('/category/{category:id}/update', [CategoryController::class, 'update'])->name('category.update');
-Route::delete('/category/{category}/delete', [CategoryController::class, 'destroy'])->name('category.destory');
+
 
 
 Route::get('/profile/{user:id}', [ProfilesController::class, 'show'])->name('profile.show');

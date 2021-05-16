@@ -16,8 +16,17 @@ class User
      */
     public function handle(Request $request, Closure $next)
     {
-//        if(auth()->user()->id === $request->user()->id){
-        return $next($request);
+        $role = '';
+        foreach($request->user()->privileges as $role){
+            $role = $role->name;
+        };
+        if($role == 'Administrator'){
+        dd('greatfor u');
+            return $next($request);
+
+        }else{
+            dd('fuckyou');
+    }
 //        }else{
 //            dd('get the fuck off');
 //        }

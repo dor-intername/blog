@@ -72,4 +72,10 @@ class User extends Authenticatable
     public function owns($related){
         return $this->id == $related->user_id;
     }
+
+    public function privileges(){
+        return $this->belongsToMany(Privilege::class);
+
+
+    }
 }

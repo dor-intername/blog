@@ -10964,6 +10964,10 @@ a.text-dark:focus {
     height: 50%;
 
 }
+.row.categories{
+    margin-right: unset !important;
+    margin-left: unset !important;
+}
 .category-wrapper{
 
 }
