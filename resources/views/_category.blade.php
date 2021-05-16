@@ -1,3 +1,3 @@
 
-    <div class="col-2 border">{{$category->name}}</div>
+    <div class="col-1 category_wrapper border">{{$category->name}}</div>
 

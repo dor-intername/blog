@@ -1,10 +1,11 @@
 <x-master>
 
-    <form action="/posts" method="POST">
+    <form action="/posts" method="POST" enctype="multipart/form-data">
         @csrf
 
         <input type="text" name="title">
         <input type="text" name="content">
+        <input type="file" name="image">
         <input type="submit" value="send">
     </form>
 

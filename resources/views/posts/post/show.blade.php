@@ -3,7 +3,11 @@
     {{$post->title}}
 
 <br>
+    @can('update',$post)
+        <br>    Edit Post
 
+    @endcan
+    <br>
     @foreach($post->comments as $comment)
         {{$comment->content}} <br>
 

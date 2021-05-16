@@ -1,6 +1,6 @@
 <x-master>
 
-    <form action="/category" method="POST">
+    <form action="{{route('category.store')}}" method="POST">
         @csrf
         <input type="text" name="name" value="{{old('name')}}">
         <input type="submit" value="send">

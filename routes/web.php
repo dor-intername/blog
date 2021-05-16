@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProfilesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,23 +16,39 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/dor/{id}',function($stam){
-    return \App\Models\User::find($stam)->posts;
+
+
+Route::get('/', [PostController::class, 'show'])->name('home');
+
+
+Route::post('/posts/', [PostController::class, 'store'])->name('post.store');
+Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+Route::get('/post/{post:id}', [PostController::class, 'index'])->name('post');
+
+
+Route::middleware(['can:userCreator,post'])->group(function () {
+    Route::get('/post/{post:id}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('/post/{post:id}/update', [PostController::class, 'update'])->name('post.update');
+    Route::delete('/post/{post:id}/delete', [PostController::class, 'destroy'])->name('post.destory');
+
+//Route::get('/post/{post:slug}',[PostController::class,'index'])->name('post');
 });
-Route::get('/', [App\Http\Controllers\PostController::class, 'show'])->name('home');
 
-Route::post('/posts/',[\App\Http\Controllers\PostController::class,'store'])->name('post.store');
-Route::get('/post/create',[\App\Http\Controllers\PostController::class,'create'])->name('post.create');
-Route::get('/post/{post}',[\App\Http\Controllers\PostController::class,'index'])->name('post');
-Route::get('/post/{id}/edit',[\App\Http\Controllers\PostController::class,'edit'])->name('post.edit');
-////Route::get('/post/{post:slug}',[\App\Http\Controllers\PostController::class,'index'])->name('post');
-Route::put('/post/{post}/update',[\App\Http\Controllers\PostController::class,'update'])->name('post.update');
-Route::delete('/post/{post}/delete',[\App\Http\Controllers\PostController::class,'destroy'])->name('post.destory');
 
-Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.create');
-Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('category.store');
-Route::get('/category/{category}', [App\Http\Controllers\CategoryController::class, 'show'])->name('category');
-Route::get('/category/{category}/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name('category.edit');
-Route::put('/category/{category}/update', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
-Route::delete('/category/{category}/delete',[\App\Http\Controllers\CategoryController::class,'destroy'])->name('category.destory');
+Route::post('/category', [CategoryController::class, 'store'])->name('category.create');
+Route::get('/category/create', [CategoryController::class, 'create'])->name('category.store');
+Route::get('/category/{category:id}', [CategoryController::class, 'show'])->name('category');
+Route::get('/category/{category:id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+Route::put('/category/{category:id}/update', [CategoryController::class, 'update'])->name('category.update');
+Route::delete('/category/{category}/delete', [CategoryController::class, 'destroy'])->name('category.destory');
 
+
+Route::get('/profile/{user:id}', [ProfilesController::class, 'show'])->name('profile.show');
+
+
+Route::middleware('can:selfUser,user')->group(function () {
+    Route::get('/profile/{user:id}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/{user:id}/update', [ProfilesController::class, 'update'])->name('profile.update');
+});
+
+Route::post('/profile/{user:id}/follow', [ProfilesController::class, 'follow'])->name('profile.follow');

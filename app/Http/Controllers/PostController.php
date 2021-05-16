@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Eloquent;
+
 /**
  * @mixin Builder
  */
@@ -20,17 +21,18 @@ class PostController extends Controller
 
     public function index(Post $post)
     {
-        return view('posts.post.index',compact('post'));
+        return view('posts.post.show', compact('post'));
     }
 
-    public function show(Post $post,Category $category){
+    public function show(Post $post, Category $category)
+    {
 
-        $data =[
+        $data = [
             'post' => $post,
-            'categories' => $category->limit(6)->get(),
+            'categories' => $category->limit(12)->get(),
         ];
 
-        return view('welcome',$data);
+        return view('welcome', $data);
     }
 
     public function create()
@@ -40,12 +42,19 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ]);
 
-         $request->request->add(['user_id'=> auth()->id()]);
+        $imageName = time() .  '-'. $request->title .'.' . $request->image->extension();
+
+        $request->image->move(public_path('images'), $imageName);
+
+
+        $request->request->add(['user_id' => auth()->id()]);
 //
         Post::create($request->all());
 
@@ -54,30 +63,30 @@ class PostController extends Controller
     }
 
 
-    public function edit(Post $id)
+    public function edit(Post $post)
     {
-        $post = $id;
-
-        return view('posts.post.edit',compact('post'));
+        return view('posts.post.edit', compact('post'));
 
     }
 
-    public function update(Request $request,Post $post)
+    public function update(Request $request, Post $post)
     {
-       $request->validate([
+        $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ]);
 
         $post->update($request->all());
 
-        return redirect('/post/'.$post->id);
+        return redirect('/post/' . $post->id);
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
 
-        return redirect('/')->with('success','Post is Deleted');
+        return redirect('/')->with('success', 'Post is Deleted');
     }
 }
