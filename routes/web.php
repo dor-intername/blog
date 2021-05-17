@@ -27,7 +27,7 @@ Route::get('/post/create', [PostController::class, 'create'])->name('post.create
 Route::get('/post/{post:id}', [PostController::class, 'index'])->name('post');
 
 
-Route::middleware(['can:userCreator,post'])->group(function () {
+Route::middleware(['can:update,post'])->group(function () {
     Route::get('/post/{post:id}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::put('/post/{post:id}/update', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/{post:id}/delete', [PostController::class, 'destroy'])->name('post.destory');
@@ -37,6 +37,7 @@ Route::middleware(['can:userCreator,post'])->group(function () {
 
 
 Route::post('/category', [CategoryController::class, 'store'])->name('category.create');
+
 Route::middleware('user.administrator')->group(function () {
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.store');
     Route::get('/category/{category:id}/edit', [CategoryController::class, 'edit'])->name('category.edit');

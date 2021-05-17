@@ -54,12 +54,10 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        if(isAdministrator()){
+            return true;
+        }
 
-
-    }
-
-    public function userCreator(User $user,Post $post){
         if($user->id === $post->user_id){
             return true;
         }else{

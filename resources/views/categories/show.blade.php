@@ -3,7 +3,7 @@
     <br><br>
     @foreach($category->posts as $post)
 
-        {{$post->title}} <br>
+        <a href="{{route('post',$post->id)}}"> {{$post->title}} </a><br>
     @endforeach
 
 </x-master>
