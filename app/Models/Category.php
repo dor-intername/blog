@@ -23,4 +23,8 @@ protected $table = 'categories';
 
         return $this->belongsToMany(Post::class,'category_post');
     }
+
+    public function photo(){
+        return $this->morphToMany(Photo::class,'photoable','photoable');
+    }
 }

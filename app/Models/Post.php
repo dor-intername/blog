@@ -31,6 +31,10 @@ class Post extends Model
         return redirect('/post/'.$path);
     }
 
+    public function photo(){
+        return $this->morphToMany(Photo::class,'photoable','photoable');
+    }
+
 
     public function getRouteKeyName()
     {

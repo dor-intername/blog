@@ -46,8 +46,8 @@ class User extends Authenticatable
     ];
 
 
-
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
@@ -69,13 +69,20 @@ class User extends Authenticatable
 
     }
 
-    public function owns($related){
+    public function owns($related)
+    {
         return $this->id == $related->user_id;
     }
 
-    public function privileges(){
+    public function privileges()
+    {
         return $this->belongsToMany(Privilege::class);
 
 
+    }
+
+    public function photo()
+    {
+        return $this->morphToMany(Photo::class,'photoable','photoable');
     }
 }

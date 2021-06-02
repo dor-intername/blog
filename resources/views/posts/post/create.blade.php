@@ -4,7 +4,7 @@
         @csrf
 
         <input type="text" name="title">
-        <input type="text" name="content">
+        <input type="text" name="body">
         <input type="file" name="image">
         <input type="submit" value="send">
     </form>

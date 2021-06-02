@@ -20,7 +20,6 @@ class CreatePostsTable extends Migration
             $table->integer('views')->nullable();
             $table->string('slug')->nullable();
             $table->string('content');
-            $table->string('image')->nullable();
             $table->integer('likes')->nullable();
             $table->integer('favorite_comment')->nullable();
             $table->timestamps();

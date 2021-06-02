@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $roles = ['Administrator', 'Editor', 'Member'];
-
+        User::factory()->create(['email'=>'dor@dor.com','password'=>bcrypt('12345678')]);
         for ($i = 0; $i < count($roles); $i++) {
 
             DB::table('privileges')->insert(['name' => $roles[$i]]);

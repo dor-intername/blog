@@ -36,10 +36,11 @@ Route::middleware(['can:update,post'])->group(function () {
 });
 
 
-Route::post('/category', [CategoryController::class, 'store'])->name('category.create');
+Route::post('/category', [CategoryController::class, 'store'])->name('category.show');
 
 Route::middleware('user.administrator')->group(function () {
-    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.store');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
     Route::get('/category/{category:id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::put('/category/{category:id}/update', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/category/{category}/delete', [CategoryController::class, 'destroy'])->name('category.destory');
